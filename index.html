@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GF Hats - Agendamento</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="-GF-hats-sem-fundo.png" type="image/png" />
+</head>
+<body>
+  <header>
+    <img src="-GF-hats-sem-fundo.png" alt="Logo GF Hats" class="logo" />
+    <p>//Tem que por frase ainda !!!!</p>
+  </header>
+
+  <section>
+    <h2>Serviços</h2>
+    <div class="servicos">
+      <div class="card" onclick="mostrarGaleria(['modelagem.jpg'])">Modelagem</div>
+      <div class="card" onclick="mostrarGaleria(['limpeza1.jpg', 'limpeza2.jpg', 'limpeza3.jpg'])">Limpeza</div>
+      <div class="card" onclick="mostrarGaleria(['goma.jpg'])">Aplicação de goma</div>
+      <div class="card" onclick="mostrarGaleria(['aba.jpg'])">Diminuição de aba</div>
+      <div class="card" onclick="mostrarGaleria(['restauracao.jpg'])">Restauração</div>
+      <div class="card" onclick="mostrarGaleria(['penas.jpg'])">Penas naturais</div>
+      <div class="card" onclick="mostrarGaleria(['adesivos.jpg'])">Adesivos</div>
+    </div>
+
+    <!-- Modal com galeria -->
+    <div id="modalImagem" class="modal">
+      <span id="fecharModal" onclick="fecharImagem()">×</span>
+      <img id="imagemGrande" src="" alt="Serviço" />
+      <div class="setas">
+        <button onclick="mudarImagem(-1)">‹</button>
+        <button onclick="mudarImagem(1)">›</button>
+      </div>
+    </div>
+
+    <h2>Agende seu horário</h2>
+    <form onsubmit="enviarWhatsApp(event)">
+      <label for="nome">Nome:</label>
+      <input type="text" id="nome" name="nome" required />
+
+      <label for="telefone">Telefone:</label>
+      <input type="text" id="telefone" name="telefone" required />
+
+      <label for="servico">Serviço desejado:</label>
+      <select id="servico" name="servico">
+        <option value="Modelagem">Modelagem</option>
+        <option value="Limpeza">Limpeza</option>
+        <option value="Aplicação de goma">Aplicação de goma</option>
+        <option value="Diminuição de aba">Diminuição de aba</option>
+        <option value="Restauração">Restauração</option>
+        <option value="Penas naturais">Penas naturais</option>
+        <option value="Adesivos">Adesivos</option>
+      </select>
+
+      <label for="mensagem">Mensagem:</label>
+      <textarea id="mensagem" name="mensagem" placeholder="Escreva aqui mais detalhes, se quiser..."></textarea>
+
+      <button type="submit">Agendar via WhatsApp</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>Endereço: Rua Wilson da Silveira Lemos, 415 - Boa Esperança - MG</p>
+    <p>
+      <a href="https://www.instagram.com/gfhats" target="_blank">Instagram</a> |
+      <a href="https://wa.me/5535988881234" target="_blank">WhatsApp</a>
+    </p>
+  </footer>
+
+  <script>
+    function enviarWhatsApp(event) {
+      event.preventDefault();
+      const nome = document.getElementById("nome").value;
+      const telefone = document.getElementById("telefone").value;
+      const servico = document.getElementById("servico").value;
+      const mensagem = document.getElementById("mensagem").value;
+
+      const numeroDestino = "5535988881234";
+      const texto = `Olá, me chamo ${nome}. Gostaria de agendar um serviço de ${servico}.\nTelefone: ${telefone}\nDetalhes: ${mensagem}`;
+
+      const url = `https://wa.me/${numeroDestino}?text=${encodeURIComponent(texto)}`;
+      window.open(url, "_blank");
+    }
+
+    let imagensGaleria = [];
+    let indexAtual = 0;
+
+    function mostrarGaleria(lista) {
+      imagensGaleria = lista;
+      indexAtual = 0;
+      atualizarImagem();
+      document.getElementById("modalImagem").style.display = "flex";
+    }
+
+    function atualizarImagem() {
+      document.getElementById("imagemGrande").src = imagensGaleria[indexAtual];
+    }
+
+    function mudarImagem(direcao) {
+      indexAtual += direcao;
+      if (indexAtual < 0) indexAtual = imagensGaleria.length - 1;
+      if (indexAtual >= imagensGaleria.length) indexAtual = 0;
+      atualizarImagem();
+    }
+
+    function fecharImagem() {
+      document.getElementById("modalImagem").style.display = "none";
+    }
+  </script>
+</body>
+</html>

@@ -1,6 +1,6 @@
 # GF Hats – Agendamento de serviços para chapéus 
 
-Este é o site oficial da GF Hats, uma barbearia especializada em modelagem, limpeza e restauração de chapéus. O site permite que o cliente agende um horário direto pelo WhatsApp e visualize os serviços disponíveis com fotos reais.
+Este é o site oficial da GF Hats, uma loja especializada em modelagem, limpeza e restauração de chapéus. O site permite que o cliente agende um horário direto pelo WhatsApp e visualize os serviços disponíveis com fotos reais.
 
 ---
 
